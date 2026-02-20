@@ -1,0 +1,18 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with routes for habits page and weekly summary page, wrapped in a Layout component.",
+  "frontend/src/components/Layout.tsx": "Root layout component with clean header featuring simple logo, refined navigation buttons with subtle hover states, and minimalist footer with caffeine.ai attribution.",
+  "frontend/src/pages/HabitsPage.tsx": "Main habits page with professional typography using semibold weights and balanced spacing for clean layout, with light blue background on the header section.",
+  "frontend/src/pages/SummaryPage.tsx": "Weekly summary page with refined typography and consistent spacing matching the professional design system.",
+  "frontend/src/components/HabitForm.tsx": "Form component with clean card styling, subtle shadows, consistent spacing, and professional button design without heavy animations.",
+  "frontend/src/components/HabitList.tsx": "Component displaying habits in responsive grid with consistent spacing and refined loading/empty states.",
+  "frontend/src/components/HabitCard.tsx": "Individual habit card with clean borders, consistent padding, subtle elevation on hover, and professional typography.",
+  "frontend/src/components/CheckInButton.tsx": "Button component with subtle hover states, smooth transitions, and understated completion feedback without scale animations.",
+  "frontend/src/components/StreakDisplay.tsx": "Component displaying current and longest streak with badge icon and amber-themed styling.",
+  "frontend/src/components/WeeklySummary.tsx": "Comprehensive weekly summary with clean stat cards, subtle shadows, professional typography, and balanced spacing for polished presentation.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching habits, adding new habits, and checking in habits with automatic cache invalidation.",
+  "frontend/src/hooks/useTodayCheckIn.ts": "Hook that determines if a habit has been checked in today by comparing timestamps.",
+  "frontend/src/hooks/useStreakCalculation.ts": "Hook that calculates current and longest streaks from check-in timestamps, handling consecutive day logic.",
+  "frontend/src/hooks/useWeeklySummary.ts": "Hook that processes habit data to generate weekly statistics including total check-ins, completion rate, and per-habit breakdown.",
+  "frontend/src/index.css": "Global styles with professional OKLCH color system featuring muted tones, subtle gradients, and refined shadow utilities for a polished aesthetic.",
+  "frontend/tailwind.config.js": "Tailwind configuration with Inter font, professional font weights (medium/semibold), muted color palette, smaller border radii, and subtle shadow utilities."
+}

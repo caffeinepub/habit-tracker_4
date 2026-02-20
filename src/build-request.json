@@ -1,0 +1,38 @@
+{
+  "kind": "build_request",
+  "title": "Change selected background to light blue",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Update the background color of the element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2] to light blue using Tailwind CSS utility classes",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "make this background light blue"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The selected element displays a light blue background color",
+        "The color change is applied using Tailwind CSS classes consistent with the existing design system"
+      ]
+    }
+  ],
+  "constraints": [
+    "Apply the background color change only to the specific element selected by the user via XPath",
+    "Use Tailwind CSS utility classes for styling consistency",
+    "Do not modify other page elements or the overall color scheme"
+  ],
+  "nonGoals": [
+    "Changing backgrounds of other elements",
+    "Modifying the global color system or theme variables",
+    "Adding new color tokens to the design system"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
