@@ -1,43 +1,4 @@
 {
   "kind": "feature_evidence_report",
-  "features": [
-    {
-      "featureId": "feature-update-habitcard-to-support-swipe-left-on-mobile-touch-and-click-drag-left-on-desktop-pointer-gestures-when-the-card-is-dragged-swiped-sufficiently-to-the-left-reveal-a-red-delete-button-or-auto-trigger-deletion-with-a-visual-confirmation-e-g-the-card-slides-out-and-disappears-implement-this-without-any-external-gesture-libraries-use-native-pointer-touch-events",
-      "featureTitle": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures. When the card is dragged/swiped sufficiently to the left, reveal a red delete button or auto-trigger deletion with a visual confirmation (e.g., the card slides out and disappears). Implement this without any external gesture libraries — use native pointer/touch events.",
-      "files": [
-        "frontend/src/components/HabitCard.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-usedeletehabit-mutation-hook-in-usequeries-ts-that-calls-the-backend-deletehabit-function-and-invalidates-the-habits-query-on-success",
-      "featureTitle": "Add a `useDeleteHabit` mutation hook in useQueries.ts that calls the backend `deleteHabit` function and invalidates the habits query on success.",
-      "files": [
-        "frontend/src/hooks/useQueries.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    }
-  ]
+  "features": []
 }

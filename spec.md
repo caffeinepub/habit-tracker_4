@@ -1,12 +1,9 @@
 # Specification
 
 ## Summary
-**Goal:** Allow users to delete habits by swiping left on mobile or click-dragging left on desktop.
+**Goal:** Fix the transparency on the green check mark circles in the CheckInButton component so they are fully opaque.
 
 **Planned changes:**
-- Add a `deleteHabit(habitId)` backend function that removes the habit and its associated check-ins, restricted to the authenticated owner.
-- Add a `useDeleteHabit` mutation hook that calls the backend delete function and invalidates the habits query on success.
-- Update HabitCard to support swipe-left (touch) and drag-left (pointer) gestures using native events — dragging past a threshold reveals a red delete button; releasing before the threshold snaps the card back.
-- Wire the delete gesture to call `useDeleteHabit` and remove the card from the list in both HabitsPage and HabitList.
+- Remove any transparency or opacity from the green check mark circle background in the CheckInButton component so underlying content is not visible through it.
 
-**User-visible outcome:** Users can swipe left on a habit card (mobile) or click-drag left (desktop) to reveal a red delete button and remove the habit from their list.
+**User-visible outcome:** The green check mark circles appear fully solid with no see-through effect, hiding any content or UI elements beneath them.

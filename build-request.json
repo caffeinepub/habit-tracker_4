@@ -1,78 +1,34 @@
 {
   "kind": "build_request",
-  "title": "Add swipe/drag-to-delete for habits",
-  "projectName": "Habit Tracker",
+  "title": "Fix green check mark circle transparency",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add a delete habit backend function that removes a habit (and its associated check-ins) by ID for the authenticated user.",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-user-delete"
-        ],
-        "quotes": [
-          "I also need to be able to remove / delete habits."
-        ]
-      },
-      "acceptanceCriteria": [
-        "A `deleteHabit(habitId)` function exists in the backend actor.",
-        "Calling deleteHabit removes the habit from the user's habit list.",
-        "Only the authenticated owner of the habit can delete it.",
-        "Returns an ok/err variant indicating success or failure."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures. When the card is dragged/swiped sufficiently to the left, reveal a red delete button or auto-trigger deletion with a visual confirmation (e.g., the card slides out and disappears). Implement this without any external gesture libraries — use native pointer/touch events.",
+      "text": "Remove the transparency/opacity from the green check mark circles in CheckInButton so the circle is fully opaque and does not allow any underlying content to show through.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-delete"
+          "msg-4"
         ],
         "quotes": [
-          "I want to be able to swipe left (on mobile) / click and drag left (on PC) on each habit and delete them."
+          "There is a slight transparency on the green check mark circles. Make it so I can't see through it to the function below"
         ]
       },
       "acceptanceCriteria": [
-        "On mobile, swiping left on a HabitCard reveals a red delete action.",
-        "On desktop, clicking and dragging left on a HabitCard reveals the same red delete action.",
-        "Dragging past a threshold (e.g., 80px) triggers or reveals the delete button.",
-        "Releasing before the threshold snaps the card back to its original position.",
-        "Confirming or completing the delete gesture calls the deleteHabit mutation and removes the card from the list.",
-        "The interaction works consistently in both HabitsPage and HabitList."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Add a `useDeleteHabit` mutation hook in useQueries.ts that calls the backend `deleteHabit` function and invalidates the habits query on success.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-user-delete"
-        ],
-        "quotes": [
-          "I also need to be able to remove / delete habits."
-        ]
-      },
-      "acceptanceCriteria": [
-        "useDeleteHabit mutation hook exists and calls the backend deleteHabit function.",
-        "On success, the habits list query is invalidated so the UI refreshes automatically.",
-        "Loading and error states are handled."
+        "The green check mark circle background is fully opaque with no visible transparency.",
+        "Content or UI elements beneath the circle are not visible through it.",
+        "The green color and check mark icon remain visually consistent with the existing design."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
-    "Do not use any third-party gesture libraries; implement swipe/drag using native pointer and touch events.",
-    "Keep all backend logic in backend/main.mo (single-actor architecture)."
+    "Do not change the size, shape, or icon of the check mark circle.",
+    "Do not modify any files listed in frontend.immutablePaths."
   ],
   "nonGoals": [
-    "Bulk delete or multi-select habits.",
-    "Undo/redo functionality after deletion.",
-    "Swipe-right or any other directional gesture actions.",
-    "Editing habit details via swipe."
+    "Redesigning the check mark button or changing its color.",
+    "Modifying any other component styles unrelated to the transparency fix."
   ],
   "imageRequirements": {
     "required": [],

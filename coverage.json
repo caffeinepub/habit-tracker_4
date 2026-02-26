@@ -1,58 +1,32 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T22:48:11.731Z",
+  "generatedAt": "2026-02-26T22:59:16.216Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 2,
+    "total": 1,
+    "implemented": 0,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add a delete habit backend function that removes a habit (and its associated check-ins) by ID for the authenticated user.",
-        "status": "unknown",
-        "plannedFiles": [],
+        "summary": "Remove the transparency/opacity from the green check mark circles in CheckInButton so the circle is fully opaque and does not allow any underlying content to show through.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/components/CheckInButton.tsx"
+        ],
         "matchedFiles": []
-      },
-      {
-        "id": "REQ-2",
-        "summary": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures. When the card is dragged/swiped sufficiently to the left, reveal a red delete button or auto-trigger deletion with a visual confirmation (e.g., the card slides out and disappears). Implement this without any external gesture libraries — use native pointer/touch events.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/HabitCard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/HabitCard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Add a `useDeleteHabit` mutation hook in useQueries.ts that calls the backend `deleteHabit` function and invalidates the habits query on success.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts"
-        ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
     "frontend/src/components/HabitCard.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useQueries.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,38 +1,17 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Habit tracking app with swipe/drag-to-delete functionality for habits",
+  "summary": "Habit tracking app with swipe-to-delete and green check mark circles for habits.",
   "architectural_notes": [],
-  "known_issues": [],
-  "isFixRequest": false,
-  "existing_features": [
-    {
-      "id": "feature-update-habitcard-to-support-swipe-left-on-mobile-touch-and-click-drag-left-on-desktop-pointer-gestures-when-the-card-is-dragged-swiped-sufficiently-to-the-left-reveal-a-red-delete-button-or-auto-trigger-deletion-with-a-visual-confirmation-e-g-the-card-slides-out-and-disappears-implement-this-without-any-external-gesture-libraries-use-native-pointer-touch-events",
-      "title": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures. When the card is dragged/swiped sufficiently to the left, reveal a red delete button or auto-trigger deletion with a visual confirmation (e.g., the card slides out and disappears). Implement this without any external gesture libraries — use native pointer/touch events.",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-usedeletehabit-mutation-hook-in-usequeries-ts-that-calls-the-backend-deletehabit-function-and-invalidates-the-habits-query-on-success",
-      "title": "Add a `useDeleteHabit` mutation hook in useQueries.ts that calls the backend `deleteHabit` function and invalidates the habits query on success.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    }
+  "known_issues": [
+    "Green check mark circles have slight transparency, showing content beneath them"
   ],
+  "isFixRequest": true,
+  "existing_features": [],
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Delete habits via swipe left (mobile) or click-drag left (PC)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Add a delete habit backend function that removes a habit (and its associated check-ins) by ID for the authenticated user.",
+      "summary": "Remove the transparency/opacity from the green check mark circles in CheckInButton so the circle is fully opaque and does not allow any underlying content to show through.",
       "reqIds": [
         "REQ-1"
       ],
@@ -40,7 +19,7 @@
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Habit Tracker",
+  "projectName": "Fix green check mark circle transparency",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

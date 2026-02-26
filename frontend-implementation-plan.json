@@ -1,40 +1,21 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add swipe/drag-to-delete for habits",
+  "title": "Fix green check mark circle transparency",
   "requirements": [
     {
-      "id": "REQ-2",
-      "summary": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures for deletion",
+      "id": "REQ-1",
+      "summary": "Remove transparency from green check mark circles in CheckInButton so the circle background is fully opaque",
       "acceptanceCriteria": [
-        "On mobile, swiping left on a HabitCard reveals a red delete action.",
-        "On desktop, clicking and dragging left on a HabitCard reveals the same red delete action.",
-        "Dragging past a threshold (e.g., 80px) triggers or reveals the delete button.",
-        "Releasing before the threshold snaps the card back to its original position.",
-        "Confirming or completing the delete gesture calls the deleteHabit mutation and removes the card from the list.",
-        "The interaction works consistently in both HabitsPage and HabitList."
+        "The green check mark circle background is fully opaque with no visible transparency.",
+        "Content or UI elements beneath the circle are not visible through it.",
+        "The green color and check mark icon remain visually consistent with the existing design."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/HabitCard.tsx",
+          "path": "frontend/src/components/CheckInButton.tsx",
           "operation": "modify",
-          "description": "Add native pointer and touch event handlers to implement swipe-left and drag-left gestures. Track pointer movement to translate the card horizontally when dragged left. Show a red delete button or background when the card is dragged beyond an 80px threshold. On release, either snap back to original position or trigger deletion via the useDeleteHabit mutation hook. Use CSS transforms for smooth animations and ensure the CheckInButton remains interactive during the gesture. The gesture logic should use onPointerDown, onPointerMove, onPointerUp, and onPointerCancel events to work consistently across touch and mouse inputs."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Add a useDeleteHabit mutation hook that calls the backend deleteHabit function and invalidates the habits query on success",
-      "acceptanceCriteria": [
-        "useDeleteHabit mutation hook exists and calls the backend deleteHabit function.",
-        "On success, the habits list query is invalidated so the UI refreshes automatically.",
-        "Loading and error states are handled."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Add a useDeleteHabit mutation hook using useMutation from React Query. The mutation function should call actor.deleteHabit(habitId) where habitId is a bigint. On success, invalidate the 'habits' query key to refresh the habit list automatically. Handle loading and error states through the standard useMutation return values. Export the hook so it can be imported and used in HabitCard."
+          "description": "Modify the checked-in state button styling to remove any transparency or opacity from the green circle background. Ensure the background color uses a fully opaque value (e.g., change from bg-green-500/90 to bg-green-500, or adjust any opacity property to 1.0). Verify that the circle remains 44px in size, retains the check mark icon, and maintains visual consistency with the existing design while making the background completely opaque so no underlying content is visible through it."
         }
       ]
     }

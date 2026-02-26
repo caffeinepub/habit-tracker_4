@@ -137,7 +137,6 @@ export function HabitCard({ habit, index, selectedDate, isToday }: HabitCardProp
         className={`
           flex items-center gap-3 px-4 py-3 rounded-2xl min-h-[64px]
           ${pastelClass}
-          ${isCheckedIn ? 'opacity-80' : ''}
           select-none touch-pan-y
         `}
         style={{
@@ -152,13 +151,13 @@ export function HabitCard({ habit, index, selectedDate, isToday }: HabitCardProp
         onPointerCancel={handlePointerCancel}
       >
         {/* Icon */}
-        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/50 flex-shrink-0 text-xl pointer-events-none">
+        <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-white/50 flex-shrink-0 text-xl pointer-events-none ${isCheckedIn ? 'opacity-60' : ''}`}>
           {icon}
         </div>
 
         {/* Name + count */}
-        <div className="flex-1 min-w-0 pointer-events-none">
-          <p className={`font-semibold text-base leading-tight truncate text-foreground ${isCheckedIn ? 'line-through opacity-60' : ''}`}>
+        <div className={`flex-1 min-w-0 pointer-events-none ${isCheckedIn ? 'opacity-60' : ''}`}>
+          <p className={`font-semibold text-base leading-tight truncate text-foreground ${isCheckedIn ? 'line-through' : ''}`}>
             {habit.name}
           </p>
           {habit.description ? (
@@ -170,7 +169,7 @@ export function HabitCard({ habit, index, selectedDate, isToday }: HabitCardProp
           )}
         </div>
 
-        {/* Check-in button — exempt from drag */}
+        {/* Check-in button — exempt from drag and opacity changes */}
         <div data-checkin-button>
           <CheckInButton
             habitId={habit.id}
