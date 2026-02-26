@@ -1,6 +1,7 @@
 import { Outlet } from '@tanstack/react-router';
 import { CheckSquare } from 'lucide-react';
 import { BottomNav } from './BottomNav';
+import { LoginButton } from './LoginButton';
 
 export function Layout() {
   return (
@@ -14,6 +15,7 @@ export function Layout() {
             </div>
             <span className="text-base font-semibold text-foreground">Habit Tracker</span>
           </div>
+          <LoginButton />
         </div>
       </header>
 

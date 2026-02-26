@@ -17,12 +17,8 @@ export function CheckInButton({ habitId, isCheckedIn, isToday }: CheckInButtonPr
 
   if (isCheckedIn) {
     return (
-      <div className="flex items-center justify-center w-11 h-11 rounded-full bg-success/15 flex-shrink-0">
-        <img
-          src="/assets/generated/checkmark-complete.dim_64x64.png"
-          alt="Done"
-          className="w-6 h-6"
-        />
+      <div className="flex items-center justify-center w-11 h-11 rounded-full bg-green-500 flex-shrink-0">
+        <Check className="w-5 h-5 text-white" strokeWidth={3} />
       </div>
     );
   }

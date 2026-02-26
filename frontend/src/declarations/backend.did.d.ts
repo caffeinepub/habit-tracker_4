@@ -18,12 +18,26 @@ export interface HabitView {
   'checkIns' : Array<Time>,
 }
 export type Time = bigint;
+export interface UserProfile { 'name' : string }
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
 export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'addHabit' : ActorMethod<[string, string], bigint>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'checkIn' : ActorMethod<[bigint], undefined>,
+  'deleteHabit' : ActorMethod<[bigint], undefined>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getDummyHabits' : ActorMethod<[], Array<[string, string]>>,
   'getHabit' : ActorMethod<[bigint], HabitView>,
   'getHabits' : ActorMethod<[], Array<HabitView>>,
   'getHabitsByCheckIns' : ActorMethod<[], Array<HabitView>>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'hasHabits' : ActorMethod<[], boolean>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

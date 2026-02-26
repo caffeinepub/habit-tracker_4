@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
 import type { HabitView } from '../backend';
+import { useEffect, useRef } from 'react';
 
 export function useGetHabits() {
   const { actor, isFetching } = useActor();
@@ -45,28 +46,61 @@ export function useCheckIn() {
   });
 }
 
-const PLACEHOLDER_HABITS = [
-  { name: 'Morning Walk', description: 'Start your day with a 30-minute walk outside' },
-  { name: 'Drink 1L of Water', description: 'Stay hydrated — aim for at least 1 litre by noon' },
-  { name: 'Read for 20 Minutes', description: 'Wind down with a book or article before bed' },
-  { name: 'Meditate', description: '5-minute breathing exercise to clear your mind' },
-  { name: 'No Junk Food', description: 'Avoid processed snacks and sugary drinks today' },
-  { name: 'Stretch & Move', description: 'Do a quick 10-minute stretch or yoga session' },
-];
-
-export function useSeedPlaceholderHabits() {
+export function useDeleteHabit() {
   const { actor } = useActor();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (habitId: bigint) => {
       if (!actor) throw new Error('Actor not initialized');
-      for (const habit of PLACEHOLDER_HABITS) {
-        await actor.addHabit(habit.name, habit.description);
-      }
+      return actor.deleteHabit(habitId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['habits'] });
     },
   });
+}
+
+/**
+ * Ensures the "Stretch & Move" default habit exists for the current user.
+ * When the habits list is loaded and empty, this hook automatically seeds
+ * the default habit via an update call (which can persist state on ICP,
+ * unlike query calls).
+ */
+export function useEnsureDefaultHabits() {
+  const { actor, isFetching: actorFetching } = useActor();
+  const queryClient = useQueryClient();
+  const seededRef = useRef(false);
+
+  const habitsQuery = useGetHabits();
+
+  useEffect(() => {
+    // Only run once per session, when actor is ready and habits are loaded
+    if (seededRef.current) return;
+    if (actorFetching || !actor) return;
+    if (habitsQuery.isLoading || !habitsQuery.isFetched) return;
+
+    const habits = habitsQuery.data ?? [];
+
+    // Check if "Stretch & Move" already exists
+    const hasStretchHabit = habits.some(
+      (h) => h.name === 'Stretch & Move'
+    );
+
+    if (!hasStretchHabit) {
+      seededRef.current = true;
+      actor
+        .addHabit('Stretch & Move', 'Take a short stretch or movement break')
+        .then(() => {
+          queryClient.invalidateQueries({ queryKey: ['habits'] });
+        })
+        .catch(() => {
+          // Reset so it can retry on next render if it failed
+          seededRef.current = false;
+        });
+    } else {
+      // Already exists, mark as done
+      seededRef.current = true;
+    }
+  }, [actor, actorFetching, habitsQuery.data, habitsQuery.isLoading, habitsQuery.isFetched, queryClient]);
 }

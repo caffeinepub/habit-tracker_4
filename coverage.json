@@ -1,43 +1,57 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T15:57:31.107Z",
+  "generatedAt": "2026-02-26T22:48:11.731Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 2,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Pre-populate the backend with a set of placeholder habits so new users see example content when they first open the app. Include at least 5 varied habits such as: 'Morning Walk' (description: 'Start your day with a 30-minute walk'), 'Drink 1L of Water' (description: 'Stay hydrated throughout the day'), 'Read for 20 Minutes' (description: 'Read a book or article before bed'), 'Meditate' (description: '5-minute breathing exercise'), and 'No Junk Food' (description: 'Avoid processed snacks and sugary drinks'). These should be inserted during canister initialization (only if no habits exist yet) so they are not duplicated on upgrades.",
+        "summary": "Add a delete habit backend function that removes a habit (and its associated check-ins) by ID for the authenticated user.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-2",
-        "summary": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits, since placeholder habits will now cover most new-user scenarios. Ensure the empty state text remains accurate (e.g., 'No habits yet — tap + to add your first habit').",
+        "summary": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures. When the card is dragged/swiped sufficiently to the left, reveal a red delete button or auto-trigger deletion with a visual confirmation (e.g., the card slides out and disappears). Implement this without any external gesture libraries — use native pointer/touch events.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/HabitList.tsx"
+          "frontend/src/components/HabitCard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/HabitList.tsx"
+          "frontend/src/components/HabitCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Add a `useDeleteHabit` mutation hook in useQueries.ts that calls the backend `deleteHabit` function and invalidates the habits query on success.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
         ]
       }
     ]
   },
   "changedFiles": [
     "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/HabitList.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/HabitCard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
     "frontend/src/hooks/useQueries.ts",
     "project_state.json",
     "scratch/component-selection.json",

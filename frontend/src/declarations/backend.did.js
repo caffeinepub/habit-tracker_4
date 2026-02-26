@@ -8,6 +8,12 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 export const Time = IDL.Int;
 export const HabitView = IDL.Record({
   'id' : IDL.Nat,
@@ -18,16 +24,40 @@ export const HabitView = IDL.Record({
 });
 
 export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'addHabit' : IDL.Func([IDL.Text, IDL.Text], [IDL.Nat], []),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'checkIn' : IDL.Func([IDL.Nat], [], []),
+  'deleteHabit' : IDL.Func([IDL.Nat], [], []),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getDummyHabits' : IDL.Func(
+      [],
+      [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text))],
+      ['query'],
+    ),
   'getHabit' : IDL.Func([IDL.Nat], [HabitView], ['query']),
   'getHabits' : IDL.Func([], [IDL.Vec(HabitView)], ['query']),
   'getHabitsByCheckIns' : IDL.Func([], [IDL.Vec(HabitView)], ['query']),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'hasHabits' : IDL.Func([], [IDL.Bool], ['query']),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const UserProfile = IDL.Record({ 'name' : IDL.Text });
   const Time = IDL.Int;
   const HabitView = IDL.Record({
     'id' : IDL.Nat,
@@ -38,11 +68,29 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'addHabit' : IDL.Func([IDL.Text, IDL.Text], [IDL.Nat], []),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'checkIn' : IDL.Func([IDL.Nat], [], []),
+    'deleteHabit' : IDL.Func([IDL.Nat], [], []),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getDummyHabits' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text))],
+        ['query'],
+      ),
     'getHabit' : IDL.Func([IDL.Nat], [HabitView], ['query']),
     'getHabits' : IDL.Func([], [IDL.Vec(HabitView)], ['query']),
     'getHabitsByCheckIns' : IDL.Func([], [IDL.Vec(HabitView)], ['query']),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'hasHabits' : IDL.Func([], [IDL.Bool], ['query']),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   });
 };
 

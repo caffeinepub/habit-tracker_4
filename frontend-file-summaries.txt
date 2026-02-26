@@ -1,15 +1,15 @@
 {
   "frontend/src/App.tsx": "Main app with TanStack Router setup for / (HabitsPage) and /summary (SummaryPage) routes wrapped in Layout.",
-  "frontend/src/components/Layout.tsx": "Minimal sticky header with logo, main content area with bottom padding for the fixed nav, hidden desktop footer, and BottomNav rendered on all pages.",
-  "frontend/src/pages/HabitsPage.tsx": "Main habits page managing selected date state, rendering DateStrip + HabitList + FAB + HabitFormModal with a dynamic date label (\"Today\", \"Yesterday\", etc.).",
-  "frontend/src/pages/SummaryPage.tsx": "Weekly summary page with compact mobile-friendly header and WeeklySummary component, padded for the bottom nav.",
+  "frontend/src/components/Layout.tsx": "Sticky header with app logo/title and LoginButton in the top-right, main content area with bottom padding, hidden desktop footer with attribution, and BottomNav on all pages.",
+  "frontend/src/pages/HabitsPage.tsx": "Main habits page wrapped in AuthGuard, managing selected date state and rendering DateStrip, HabitList, FAB, and HabitFormModal for authenticated users only.",
+  "frontend/src/pages/SummaryPage.tsx": "Weekly summary page wrapped in AuthGuard, showing the WeeklySummary component only for authenticated users.",
   "frontend/src/components/HabitForm.tsx": "Standalone form for adding a new habit with name/description inputs and an optional onSuccess callback to close the parent modal after successful creation.",
-  "frontend/src/components/HabitList.tsx": "Vertical stack of HabitCards that auto-seeds placeholder habits on first load when none exist, shows a loading/seeding spinner, and falls back to a clear empty-state message if all habits are deleted.",
-  "frontend/src/components/HabitCard.tsx": "Full-width horizontal habit card with pastel background (cycling by index), emoji icon, habit name/description, check-in count, and a compact CheckInButton on the right.",
-  "frontend/src/components/CheckInButton.tsx": "Compact circular check-in button (44px) showing a checkmark image when done, a muted circle for past dates, and an interactive ring button for today with inline spinner.",
+  "frontend/src/components/HabitList.tsx": "Vertical stack of HabitCards using useGetHabits; calls useEnsureDefaultHabits to auto-seed \"Stretch & Move\" for new users, and shows a \"Setting up your habits…\" spinner instead of the empty state while seeding is in progress.",
+  "frontend/src/components/HabitCard.tsx": "Full-width habit card with pastel background, emoji icon, habit name/description, check-in count, and a CheckInButton. Now supports swipe-left (touch) and drag-left (mouse) gestures using native pointer events — dragging past 80px reveals a red delete zone and triggers deletion via `useDeleteHabit` on release; releasing early snaps the card back.",
+  "frontend/src/components/CheckInButton.tsx": "Compact circular check-in button (44px) showing a solid green background with a bold white check mark icon when done, a muted circle for past dates, and an interactive ring button for today with inline spinner.",
   "frontend/src/components/StreakDisplay.tsx": "Component displaying current and longest streak with badge icon and amber-themed styling.",
   "frontend/src/components/WeeklySummary.tsx": "Comprehensive weekly summary with clean stat cards, subtle shadows, professional typography, and balanced spacing for polished presentation.",
-  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching habits, adding habits, checking in, and seeding placeholder habits (6 example habits seeded automatically when the backend has none).",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations (getHabits, addHabit, checkIn, deleteHabit, ensureDefaultHabits). Now includes a `useDeleteHabit` mutation that calls `actor.deleteHabit(habitId)` and invalidates the habits query on success.",
   "frontend/src/hooks/useTodayCheckIn.ts": "Hook that determines if a habit has been checked in today by comparing timestamps.",
   "frontend/src/hooks/useStreakCalculation.ts": "Hook that calculates current and longest streaks from check-in timestamps, handling consecutive day logic.",
   "frontend/src/hooks/useWeeklySummary.ts": "Hook that processes habit data to generate weekly statistics including total check-ins, completion rate, and per-habit breakdown.",
@@ -19,5 +19,7 @@
   "frontend/src/components/DateStrip.tsx": "Horizontal scrollable week strip showing 7 circular day indicators (Mon–Sun), highlighting today with a border and selected date with filled primary background, emitting selected date via callback.",
   "frontend/src/components/FAB.tsx": "Circular floating action button fixed bottom-left above the bottom nav, 56px size with primary color background and a + icon, opens the add-habit sheet.",
   "frontend/src/components/HabitFormModal.tsx": "Bottom sheet (shadcn Sheet) wrapping HabitForm, slides up from the bottom with rounded top corners, dismissible by backdrop tap or close gesture.",
-  "frontend/src/hooks/useDateCheckIn.ts": "Hook that checks whether a habit has a check-in on any given target date (not just today) by comparing nanosecond timestamps to the day's start/end boundaries."
+  "frontend/src/hooks/useDateCheckIn.ts": "Hook that checks whether a habit has a check-in on any given target date (not just today) by comparing nanosecond timestamps to the day's start/end boundaries.",
+  "frontend/src/components/LoginButton.tsx": "New component that renders a Login/Logout button using Internet Identity, showing a spinner during login and clearing the query cache on logout.",
+  "frontend/src/components/AuthGuard.tsx": "New wrapper component that shows a centered login prompt with LoginButton when the user is unauthenticated, a loading state while initializing, and renders children when authenticated."
 }

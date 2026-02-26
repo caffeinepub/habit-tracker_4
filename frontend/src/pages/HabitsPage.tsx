@@ -3,6 +3,7 @@ import { HabitList } from '../components/HabitList';
 import { DateStrip } from '../components/DateStrip';
 import { FAB } from '../components/FAB';
 import { HabitFormModal } from '../components/HabitFormModal';
+import { AuthGuard } from '../components/AuthGuard';
 
 function getDateLabel(date: Date): string {
   const today = new Date();
@@ -36,25 +37,27 @@ export function HabitsPage() {
   const dateLabel = getDateLabel(selectedDate);
 
   return (
-    <div className="flex flex-col min-h-full">
-      {/* Date label */}
-      <div className="px-4 pt-2 pb-1">
-        <h2 className="text-2xl font-bold text-foreground">{dateLabel}</h2>
+    <AuthGuard>
+      <div className="flex flex-col min-h-full">
+        {/* Date label */}
+        <div className="px-4 pt-2 pb-1">
+          <h2 className="text-2xl font-bold text-foreground">{dateLabel}</h2>
+        </div>
+
+        {/* Date strip */}
+        <DateStrip selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+
+        {/* Habit list */}
+        <div className="flex-1 pb-4">
+          <HabitList selectedDate={selectedDate} isToday={isToday} />
+        </div>
+
+        {/* FAB */}
+        <FAB onClick={() => setModalOpen(true)} />
+
+        {/* Add habit modal */}
+        <HabitFormModal open={modalOpen} onClose={() => setModalOpen(false)} />
       </div>
-
-      {/* Date strip */}
-      <DateStrip selectedDate={selectedDate} onSelectDate={setSelectedDate} />
-
-      {/* Habit list */}
-      <div className="flex-1 pb-4">
-        <HabitList selectedDate={selectedDate} isToday={isToday} />
-      </div>
-
-      {/* FAB */}
-      <FAB onClick={() => setModalOpen(true)} />
-
-      {/* Add habit modal */}
-      <HabitFormModal open={modalOpen} onClose={() => setModalOpen(false)} />
-    </div>
+    </AuthGuard>
   );
 }

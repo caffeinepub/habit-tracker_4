@@ -1,10 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Pre-populate the Habit Tracker with placeholder habits so new users see example content immediately upon opening the app.
+**Goal:** Allow users to delete habits by swiping left on mobile or click-dragging left on desktop.
 
 **Planned changes:**
-- Seed the backend with at least 5 placeholder habits (e.g., "Morning Walk", "Drink 1L of Water", "Read for 20 Minutes", "Meditate", "No Junk Food") during canister initialization, only if no habits exist yet.
-- Update the HabitList empty-state UI to ensure it only appears when there are truly no habits.
+- Add a `deleteHabit(habitId)` backend function that removes the habit and its associated check-ins, restricted to the authenticated owner.
+- Add a `useDeleteHabit` mutation hook that calls the backend delete function and invalidates the habits query on success.
+- Update HabitCard to support swipe-left (touch) and drag-left (pointer) gestures using native events — dragging past a threshold reveals a red delete button; releasing before the threshold snaps the card back.
+- Wire the delete gesture to call `useDeleteHabit` and remove the card from the list in both HabitsPage and HabitList.
 
-**User-visible outcome:** New users immediately see a set of example habits when they open the app, giving a clear demonstration of how the tracker works. The empty state is still shown correctly if all habits are deleted.
+**User-visible outcome:** Users can swipe left on a habit card (mobile) or click-drag left (desktop) to reveal a red delete button and remove the habit from their list.

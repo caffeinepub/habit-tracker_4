@@ -1,56 +1,78 @@
 {
   "kind": "build_request",
-  "title": "Add placeholder habits to demonstrate app usage",
+  "title": "Add swipe/drag-to-delete for habits",
   "projectName": "Habit Tracker",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Pre-populate the backend with a set of placeholder habits so new users see example content when they first open the app. Include at least 5 varied habits such as: 'Morning Walk' (description: 'Start your day with a 30-minute walk'), 'Drink 1L of Water' (description: 'Stay hydrated throughout the day'), 'Read for 20 Minutes' (description: 'Read a book or article before bed'), 'Meditate' (description: '5-minute breathing exercise'), and 'No Junk Food' (description: 'Avoid processed snacks and sugary drinks'). These should be inserted during canister initialization (only if no habits exist yet) so they are not duplicated on upgrades.",
+      "text": "Add a delete habit backend function that removes a habit (and its associated check-ins) by ID for the authenticated user.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-user-delete"
         ],
         "quotes": [
-          "Add some place holder habits to demonstrate how it can be used (eg: Morning walk, drink 1L of water, etc)"
+          "I also need to be able to remove / delete habits."
         ]
       },
       "acceptanceCriteria": [
-        "On a fresh canister deployment with no existing habits, the placeholder habits are automatically present.",
-        "Placeholder habits are not re-inserted if habits already exist (idempotent initialization).",
-        "Each placeholder habit has a meaningful name and description.",
-        "At least 5 placeholder habits are seeded."
+        "A `deleteHabit(habitId)` function exists in the backend actor.",
+        "Calling deleteHabit removes the habit from the user's habit list.",
+        "Only the authenticated owner of the habit can delete it.",
+        "Returns an ok/err variant indicating success or failure."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits, since placeholder habits will now cover most new-user scenarios. Ensure the empty state text remains accurate (e.g., 'No habits yet — tap + to add your first habit').",
+      "text": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures. When the card is dragged/swiped sufficiently to the left, reveal a red delete button or auto-trigger deletion with a visual confirmation (e.g., the card slides out and disappears). Implement this without any external gesture libraries — use native pointer/touch events.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-user-delete"
         ],
         "quotes": [
-          "Add some place holder habits to demonstrate how it can be used"
+          "I want to be able to swipe left (on mobile) / click and drag left (on PC) on each habit and delete them."
         ]
       },
       "acceptanceCriteria": [
-        "Empty state is not shown when placeholder habits are present.",
-        "Empty state is still shown correctly if all habits are somehow deleted.",
-        "Empty state message is clear and actionable."
+        "On mobile, swiping left on a HabitCard reveals a red delete action.",
+        "On desktop, clicking and dragging left on a HabitCard reveals the same red delete action.",
+        "Dragging past a threshold (e.g., 80px) triggers or reveals the delete button.",
+        "Releasing before the threshold snaps the card back to its original position.",
+        "Confirming or completing the delete gesture calls the deleteHabit mutation and removes the card from the list.",
+        "The interaction works consistently in both HabitsPage and HabitList."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add a `useDeleteHabit` mutation hook in useQueries.ts that calls the backend `deleteHabit` function and invalidates the habits query on success.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-delete"
+        ],
+        "quotes": [
+          "I also need to be able to remove / delete habits."
+        ]
+      },
+      "acceptanceCriteria": [
+        "useDeleteHabit mutation hook exists and calls the backend deleteHabit function.",
+        "On success, the habits list query is invalidated so the UI refreshes automatically.",
+        "Loading and error states are handled."
       ]
     }
   ],
   "constraints": [
-    "Do not insert placeholder habits if habits already exist — initialization must be idempotent to avoid duplicates on canister upgrades.",
-    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui."
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Do not use any third-party gesture libraries; implement swipe/drag using native pointer and touch events.",
+    "Keep all backend logic in backend/main.mo (single-actor architecture)."
   ],
   "nonGoals": [
-    "Adding Internet Identity authentication.",
-    "Changing the visual design or theme of the app.",
-    "Adding new habit categories or tags.",
-    "Pre-populating check-in history for the placeholder habits."
+    "Bulk delete or multi-select habits.",
+    "Undo/redo functionality after deletion.",
+    "Swipe-right or any other directional gesture actions.",
+    "Editing habit details via swipe."
   ],
   "imageRequirements": {
     "required": [],

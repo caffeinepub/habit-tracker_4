@@ -15,10 +15,27 @@ export interface HabitView {
     checkIns: Array<Time>;
 }
 export type Time = bigint;
+export interface UserProfile {
+    name: string;
+}
+export enum UserRole {
+    admin = "admin",
+    user = "user",
+    guest = "guest"
+}
 export interface backendInterface {
     addHabit(name: string, description: string): Promise<bigint>;
+    assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     checkIn(habitId: bigint): Promise<void>;
+    deleteHabit(habitId: bigint): Promise<void>;
+    getCallerUserProfile(): Promise<UserProfile | null>;
+    getCallerUserRole(): Promise<UserRole>;
+    getDummyHabits(): Promise<Array<[string, string]>>;
     getHabit(id: bigint): Promise<HabitView>;
     getHabits(): Promise<Array<HabitView>>;
     getHabitsByCheckIns(): Promise<Array<HabitView>>;
+    getUserProfile(user: Principal): Promise<UserProfile | null>;
+    hasHabits(): Promise<boolean>;
+    isCallerAdmin(): Promise<boolean>;
+    saveCallerUserProfile(profile: UserProfile): Promise<void>;
 }

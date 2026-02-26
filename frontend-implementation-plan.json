@@ -1,21 +1,40 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add placeholder habits to demonstrate app usage",
+  "title": "Add swipe/drag-to-delete for habits",
   "requirements": [
     {
       "id": "REQ-2",
-      "summary": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits",
+      "summary": "Update HabitCard to support swipe-left (on mobile touch) and click-drag-left (on desktop pointer) gestures for deletion",
       "acceptanceCriteria": [
-        "Empty state is not shown when placeholder habits are present.",
-        "Empty state is still shown correctly if all habits are somehow deleted.",
-        "Empty state message is clear and actionable."
+        "On mobile, swiping left on a HabitCard reveals a red delete action.",
+        "On desktop, clicking and dragging left on a HabitCard reveals the same red delete action.",
+        "Dragging past a threshold (e.g., 80px) triggers or reveals the delete button.",
+        "Releasing before the threshold snaps the card back to its original position.",
+        "Confirming or completing the delete gesture calls the deleteHabit mutation and removes the card from the list.",
+        "The interaction works consistently in both HabitsPage and HabitList."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/HabitList.tsx",
+          "path": "frontend/src/components/HabitCard.tsx",
           "operation": "modify",
-          "description": "Review the current empty-state rendering logic and ensure it accurately displays the onboarding message ('No habits yet — tap + to add your first habit') only when the habits array is truly empty. Since placeholder habits will be seeded by the backend on fresh deployments, the empty state should rarely appear for new users. Verify that the component correctly handles the scenario where all habits are deleted, showing the empty state again. Ensure the empty state message is clear and actionable, guiding users to tap the '+' button to create their first habit."
+          "description": "Add native pointer and touch event handlers to implement swipe-left and drag-left gestures. Track pointer movement to translate the card horizontally when dragged left. Show a red delete button or background when the card is dragged beyond an 80px threshold. On release, either snap back to original position or trigger deletion via the useDeleteHabit mutation hook. Use CSS transforms for smooth animations and ensure the CheckInButton remains interactive during the gesture. The gesture logic should use onPointerDown, onPointerMove, onPointerUp, and onPointerCancel events to work consistently across touch and mouse inputs."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add a useDeleteHabit mutation hook that calls the backend deleteHabit function and invalidates the habits query on success",
+      "acceptanceCriteria": [
+        "useDeleteHabit mutation hook exists and calls the backend deleteHabit function.",
+        "On success, the habits list query is invalidated so the UI refreshes automatically.",
+        "Loading and error states are handled."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a useDeleteHabit mutation hook using useMutation from React Query. The mutation function should call actor.deleteHabit(habitId) where habitId is a bigint. On success, invalidate the 'habits' query key to refresh the habit list automatically. Handle loading and error states through the standard useMutation return values. Export the hook so it can be imported and used in HabitCard."
         }
       ]
     }
