@@ -1,0 +1,47 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T15:57:31.107Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Pre-populate the backend with a set of placeholder habits so new users see example content when they first open the app. Include at least 5 varied habits such as: 'Morning Walk' (description: 'Start your day with a 30-minute walk'), 'Drink 1L of Water' (description: 'Stay hydrated throughout the day'), 'Read for 20 Minutes' (description: 'Read a book or article before bed'), 'Meditate' (description: '5-minute breathing exercise'), and 'No Junk Food' (description: 'Avoid processed snacks and sugary drinks'). These should be inserted during canister initialization (only if no habits exist yet) so they are not duplicated on upgrades.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits, since placeholder habits will now cover most new-user scenarios. Ensure the empty state text remains accurate (e.g., 'No habits yet — tap + to add your first habit').",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/HabitList.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/HabitList.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/HabitList.tsx",
+    "frontend/src/hooks/useQueries.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

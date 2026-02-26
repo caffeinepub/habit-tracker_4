@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Habit tracker app with improved usability and mobile-ready design. Adding placeholder habits to demonstrate usage.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-update-the-empty-state-ui-in-the-habitlist-component-to-show-a-helpful-onboarding-message-only-when-there-truly-are-no-habits-since-placeholder-habits-will-now-cover-most-new-user-scenarios-ensure-the-empty-state-text-remains-accurate-e-g-no-habits-yet-tap-to-add-your-first-habit",
+      "title": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits, since placeholder habits will now cover most new-user scenarios. Ensure the empty state text remains accurate (e.g., 'No habits yet — tap + to add your first habit').",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add placeholder/demo habits (e.g. Morning walk, drink 1L of water) to demonstrate app usage",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Pre-populate the backend with a set of placeholder habits so new users see example content when they first open the app. Include at least 5 varied habits such as: 'Morning Walk' (description: 'Start your day with a 30-minute walk'), 'Drink 1L of Water' (description: 'Stay hydrated throughout the day'), 'Read for 20 Minutes' (description: 'Read a book or article before bed'), 'Meditate' (description: '5-minute breathing exercise'), and 'No Junk Food' (description: 'Avoid processed snacks and sugary drinks'). These should be inserted during canister initialization (only if no habits exist yet) so they are not duplicated on upgrades.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Habit Tracker",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

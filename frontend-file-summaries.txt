@@ -1,0 +1,23 @@
+{
+  "frontend/src/App.tsx": "Main app with TanStack Router setup for / (HabitsPage) and /summary (SummaryPage) routes wrapped in Layout.",
+  "frontend/src/components/Layout.tsx": "Minimal sticky header with logo, main content area with bottom padding for the fixed nav, hidden desktop footer, and BottomNav rendered on all pages.",
+  "frontend/src/pages/HabitsPage.tsx": "Main habits page managing selected date state, rendering DateStrip + HabitList + FAB + HabitFormModal with a dynamic date label (\"Today\", \"Yesterday\", etc.).",
+  "frontend/src/pages/SummaryPage.tsx": "Weekly summary page with compact mobile-friendly header and WeeklySummary component, padded for the bottom nav.",
+  "frontend/src/components/HabitForm.tsx": "Standalone form for adding a new habit with name/description inputs and an optional onSuccess callback to close the parent modal after successful creation.",
+  "frontend/src/components/HabitList.tsx": "Vertical stack of HabitCards that auto-seeds placeholder habits on first load when none exist, shows a loading/seeding spinner, and falls back to a clear empty-state message if all habits are deleted.",
+  "frontend/src/components/HabitCard.tsx": "Full-width horizontal habit card with pastel background (cycling by index), emoji icon, habit name/description, check-in count, and a compact CheckInButton on the right.",
+  "frontend/src/components/CheckInButton.tsx": "Compact circular check-in button (44px) showing a checkmark image when done, a muted circle for past dates, and an interactive ring button for today with inline spinner.",
+  "frontend/src/components/StreakDisplay.tsx": "Component displaying current and longest streak with badge icon and amber-themed styling.",
+  "frontend/src/components/WeeklySummary.tsx": "Comprehensive weekly summary with clean stat cards, subtle shadows, professional typography, and balanced spacing for polished presentation.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for fetching habits, adding habits, checking in, and seeding placeholder habits (6 example habits seeded automatically when the backend has none).",
+  "frontend/src/hooks/useTodayCheckIn.ts": "Hook that determines if a habit has been checked in today by comparing timestamps.",
+  "frontend/src/hooks/useStreakCalculation.ts": "Hook that calculates current and longest streaks from check-in timestamps, handling consecutive day logic.",
+  "frontend/src/hooks/useWeeklySummary.ts": "Hook that processes habit data to generate weekly statistics including total check-ins, completion rate, and per-habit breakdown.",
+  "frontend/src/index.css": "Global styles with warm pastel OKLCH color system, pastel card color CSS variables (green/blue/pink/peach/purple/teal), mobile-first body rules preventing horizontal overflow, and utility classes for pastel backgrounds and safe-area insets.",
+  "frontend/tailwind.config.js": "Tailwind config with Inter font, mobile-friendly font scale (14px base), pastel color palette tokens, larger border radii (rounded-xl/2xl/3xl), and FAB shadow utility.",
+  "frontend/src/components/BottomNav.tsx": "Fixed bottom navigation bar with Habits, Summary, and Settings (disabled) tabs using lucide icons, active-state highlighting with primary color, and 56px touch targets.",
+  "frontend/src/components/DateStrip.tsx": "Horizontal scrollable week strip showing 7 circular day indicators (Mon–Sun), highlighting today with a border and selected date with filled primary background, emitting selected date via callback.",
+  "frontend/src/components/FAB.tsx": "Circular floating action button fixed bottom-left above the bottom nav, 56px size with primary color background and a + icon, opens the add-habit sheet.",
+  "frontend/src/components/HabitFormModal.tsx": "Bottom sheet (shadcn Sheet) wrapping HabitForm, slides up from the bottom with rounded top corners, dismissible by backdrop tap or close gesture.",
+  "frontend/src/hooks/useDateCheckIn.ts": "Hook that checks whether a habit has a check-in on any given target date (not just today) by comparing nanosecond timestamps to the day's start/end boundaries."
+}

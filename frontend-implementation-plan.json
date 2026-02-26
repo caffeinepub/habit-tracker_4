@@ -1,0 +1,23 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add placeholder habits to demonstrate app usage",
+  "requirements": [
+    {
+      "id": "REQ-2",
+      "summary": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits",
+      "acceptanceCriteria": [
+        "Empty state is not shown when placeholder habits are present.",
+        "Empty state is still shown correctly if all habits are somehow deleted.",
+        "Empty state message is clear and actionable."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/HabitList.tsx",
+          "operation": "modify",
+          "description": "Review the current empty-state rendering logic and ensure it accurately displays the onboarding message ('No habits yet — tap + to add your first habit') only when the habits array is truly empty. Since placeholder habits will be seeded by the backend on fresh deployments, the empty state should rarely appear for new users. Verify that the component correctly handles the scenario where all habits are deleted, showing the empty state again. Ensure the empty state message is clear and actionable, guiding users to tap the '+' button to create their first habit."
+        }
+      ]
+    }
+  ]
+}

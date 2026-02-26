@@ -1,0 +1,23 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-empty-state-ui-in-the-habitlist-component-to-show-a-helpful-onboarding-message-only-when-there-truly-are-no-habits-since-placeholder-habits-will-now-cover-most-new-user-scenarios-ensure-the-empty-state-text-remains-accurate-e-g-no-habits-yet-tap-to-add-your-first-habit",
+      "featureTitle": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits, since placeholder habits will now cover most new-user scenarios. Ensure the empty state text remains accurate (e.g., 'No habits yet — tap + to add your first habit').",
+      "files": [
+        "frontend/src/components/HabitList.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

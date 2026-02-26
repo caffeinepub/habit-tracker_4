@@ -1,0 +1,51 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T15:57:31.105Z",
+  "summary": "The diff implements both REQ-1 and REQ-2. REQ-1 is partially implemented: placeholder habits are seeded from the frontend via a mutation hook (useSeedPlaceholderHabits) when the backend returns an empty list, rather than during canister initialization in the backend. The backend's addInitialDummyHabits function is defined but never called via an init or post_upgrade hook. REQ-2 is fully implemented in HabitList.tsx with a clear empty-state message.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Placeholder habits must be inserted during canister initialization (only if no habits exist yet) so they are not duplicated on upgrades — idempotent backend-side seeding.",
+      "reason": "The backend defines addInitialDummyHabits() but it is never called from an init or post_upgrade system hook in main.mo. The actual seeding is done from the frontend via useSeedPlaceholderHabits, which calls addHabit in a loop with no backend-side idempotency guard. This means placeholder habits are NOT automatically present on a fresh canister deployment without a frontend interaction, and there is no backend guard preventing re-insertion on upgrades.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/components/HabitList.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "A sixth placeholder habit 'Stretch & Move' is added to PLACEHOLDER_HABITS in useQueries.ts.",
+      "reason": "The build request specifies exactly the 5 named placeholder habits and does not mention 'Stretch & Move'. Adding an unrequested sixth habit goes beyond the specified requirements.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "description": "A migration module (backend/migration.mo) is added and the actor is annotated with the migration hook.",
+      "reason": "The build request does not mention adding a migration module or migration infrastructure. This is an entirely new capability not requested in REQ-1, REQ-2, or any stated goal.",
+      "evidence": [
+        "backend/migration.mo",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "A seeding spinner UI ('Setting up your habits…') is shown in HabitList during the seeding mutation (isSeeding state).",
+      "reason": "The build request does not request any seeding spinner or loading message during the seeding phase. REQ-2 only asks for an updated empty-state message.",
+      "evidence": [
+        "frontend/src/components/HabitList.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.82,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/HabitList.tsx",
+    "frontend/src/hooks/useQueries.ts",
+    "project_state.json"
+  ]
+}

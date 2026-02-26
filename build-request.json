@@ -1,0 +1,59 @@
+{
+  "kind": "build_request",
+  "title": "Add placeholder habits to demonstrate app usage",
+  "projectName": "Habit Tracker",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Pre-populate the backend with a set of placeholder habits so new users see example content when they first open the app. Include at least 5 varied habits such as: 'Morning Walk' (description: 'Start your day with a 30-minute walk'), 'Drink 1L of Water' (description: 'Stay hydrated throughout the day'), 'Read for 20 Minutes' (description: 'Read a book or article before bed'), 'Meditate' (description: '5-minute breathing exercise'), and 'No Junk Food' (description: 'Avoid processed snacks and sugary drinks'). These should be inserted during canister initialization (only if no habits exist yet) so they are not duplicated on upgrades.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Add some place holder habits to demonstrate how it can be used (eg: Morning walk, drink 1L of water, etc)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On a fresh canister deployment with no existing habits, the placeholder habits are automatically present.",
+        "Placeholder habits are not re-inserted if habits already exist (idempotent initialization).",
+        "Each placeholder habit has a meaningful name and description.",
+        "At least 5 placeholder habits are seeded."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Update the empty-state UI in the HabitList component to show a helpful onboarding message only when there truly are no habits, since placeholder habits will now cover most new-user scenarios. Ensure the empty state text remains accurate (e.g., 'No habits yet — tap + to add your first habit').",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Add some place holder habits to demonstrate how it can be used"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Empty state is not shown when placeholder habits are present.",
+        "Empty state is still shown correctly if all habits are somehow deleted.",
+        "Empty state message is clear and actionable."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not insert placeholder habits if habits already exist — initialization must be idempotent to avoid duplicates on canister upgrades.",
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui."
+  ],
+  "nonGoals": [
+    "Adding Internet Identity authentication.",
+    "Changing the visual design or theme of the app.",
+    "Adding new habit categories or tags.",
+    "Pre-populating check-in history for the placeholder habits."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
