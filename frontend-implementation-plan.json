@@ -1,21 +1,32 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix green check mark circle transparency",
+  "title": "Fix habits not loading in latest draft",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Remove transparency from green check mark circles in CheckInButton so the circle background is fully opaque",
+      "summary": "Fix habits data fetching so that habits load correctly on the HabitsPage by resolving broken query, actor initialization, or data-fetching logic in useQueries.ts or HabitList.tsx",
       "acceptanceCriteria": [
-        "The green check mark circle background is fully opaque with no visible transparency.",
-        "Content or UI elements beneath the circle are not visible through it.",
-        "The green color and check mark icon remain visually consistent with the existing design."
+        "When a logged-in user navigates to the Habits page, their habits are fetched and displayed without errors.",
+        "The HabitList component renders HabitCard entries for all habits returned by the backend.",
+        "No loading spinner or empty state is shown indefinitely when habits exist in the backend.",
+        "The useHabits query (or equivalent) successfully resolves and populates the habits list."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/CheckInButton.tsx",
+          "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Modify the checked-in state button styling to remove any transparency or opacity from the green circle background. Ensure the background color uses a fully opaque value (e.g., change from bg-green-500/90 to bg-green-500, or adjust any opacity property to 1.0). Verify that the circle remains 44px in size, retains the check mark icon, and maintains visual consistency with the existing design while making the background completely opaque so no underlying content is visible through it."
+          "description": "Review and fix the useHabits query hook to ensure it properly depends on the actor being ready and not fetching. Verify the query is enabled only when actor is available and actorFetching is false. Ensure queryFn correctly calls actor.getHabits() and handles errors. Check that queryKey is stable and does not cause unnecessary refetches. Add proper error handling and retry logic if needed."
+        },
+        {
+          "path": "frontend/src/components/HabitList.tsx",
+          "operation": "modify",
+          "description": "Review the HabitList component to ensure it correctly uses the useHabits hook and properly handles loading, error, and empty states. Verify that the component checks both isLoading and isFetching states from the query. Ensure the component does not block rendering when habits data is available. Add console logging or error boundaries if needed to debug rendering issues. Verify the auto-seed logic does not interfere with normal habit loading."
+        },
+        {
+          "path": "frontend/src/pages/HabitsPage.tsx",
+          "operation": "modify",
+          "description": "Review the HabitsPage to ensure it properly waits for authentication before rendering HabitList. Verify that AuthGuard is functioning correctly and not blocking data fetching. Check that the page does not have conflicting loading states that prevent habits from appearing. Ensure the selected date state is properly initialized and passed to HabitList."
         }
       ]
     }

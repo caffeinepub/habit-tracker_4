@@ -1,34 +1,36 @@
 {
   "kind": "build_request",
-  "title": "Fix green check mark circle transparency",
-  "priority": "normal",
+  "title": "Fix habits not loading in latest draft",
+  "projectName": "Habit Tracker",
+  "priority": "high",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Remove the transparency/opacity from the green check mark circles in CheckInButton so the circle is fully opaque and does not allow any underlying content to show through.",
+      "text": "Fix the habits data fetching so that habits load correctly on the HabitsPage. Investigate and resolve any broken query, actor initialization, or data-fetching issue in useQueries.ts or HabitList.tsx that prevents habits from appearing in the latest build.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "There is a slight transparency on the green check mark circles. Make it so I can't see through it to the function below"
+          "Habits are not loading on the new draft"
         ]
       },
       "acceptanceCriteria": [
-        "The green check mark circle background is fully opaque with no visible transparency.",
-        "Content or UI elements beneath the circle are not visible through it.",
-        "The green color and check mark icon remain visually consistent with the existing design."
+        "When a logged-in user navigates to the Habits page, their habits are fetched and displayed without errors.",
+        "The HabitList component renders HabitCard entries for all habits returned by the backend.",
+        "No loading spinner or empty state is shown indefinitely when habits exist in the backend.",
+        "The useHabits query (or equivalent) successfully resolves and populates the habits list."
       ]
     }
   ],
   "constraints": [
-    "Do not change the size, shape, or icon of the check mark circle.",
-    "Do not modify any files listed in frontend.immutablePaths."
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Do not change the backend data model or existing canister methods."
   ],
   "nonGoals": [
-    "Redesigning the check mark button or changing its color.",
-    "Modifying any other component styles unrelated to the transparency fix."
+    "Adding new habit features or UI changes unrelated to the loading bug.",
+    "Modifying backend logic unless the root cause is confirmed to be a backend issue."
   ],
   "imageRequirements": {
     "required": [],

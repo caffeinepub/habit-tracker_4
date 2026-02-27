@@ -1,4 +1,24 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-fix-the-habits-data-fetching-so-that-habits-load-correctly-on-the-habitspage-investigate-and-resolve-any-broken-query-actor-initialization-or-data-fetching-issue-in-usequeries-ts-or-habitlist-tsx-that-prevents-habits-from-appearing-in-the-latest-build",
+      "featureTitle": "Fix the habits data fetching so that habits load correctly on the HabitsPage. Investigate and resolve any broken query, actor initialization, or data-fetching issue in useQueries.ts or HabitList.tsx that prevents habits from appearing in the latest build.",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

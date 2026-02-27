@@ -1,10 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
+import { useInternetIdentity } from './useInternetIdentity';
 import type { HabitView } from '../backend';
 import { useEffect, useRef } from 'react';
 
 export function useGetHabits() {
   const { actor, isFetching } = useActor();
+  const { identity, isInitializing } = useInternetIdentity();
+  const isAuthenticated = !!identity && !isInitializing;
 
   return useQuery<HabitView[]>({
     queryKey: ['habits'],
@@ -12,7 +15,8 @@ export function useGetHabits() {
       if (!actor) return [];
       return actor.getHabits();
     },
-    enabled: !!actor && !isFetching,
+    enabled: isAuthenticated && !!actor && !isFetching,
+    retry: 1,
   });
 }
 
@@ -69,14 +73,17 @@ export function useDeleteHabit() {
  */
 export function useEnsureDefaultHabits() {
   const { actor, isFetching: actorFetching } = useActor();
+  const { identity, isInitializing } = useInternetIdentity();
   const queryClient = useQueryClient();
   const seededRef = useRef(false);
 
+  const isAuthenticated = !!identity && !isInitializing;
   const habitsQuery = useGetHabits();
 
   useEffect(() => {
     // Only run once per session, when actor is ready and habits are loaded
     if (seededRef.current) return;
+    if (!isAuthenticated) return;
     if (actorFetching || !actor) return;
     if (habitsQuery.isLoading || !habitsQuery.isFetched) return;
 
@@ -102,5 +109,5 @@ export function useEnsureDefaultHabits() {
       // Already exists, mark as done
       seededRef.current = true;
     }
-  }, [actor, actorFetching, habitsQuery.data, habitsQuery.isLoading, habitsQuery.isFetched, queryClient]);
+  }, [actor, actorFetching, isAuthenticated, habitsQuery.data, habitsQuery.isLoading, habitsQuery.isFetched, queryClient]);
 }

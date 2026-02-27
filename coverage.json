@@ -1,23 +1,27 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T22:59:16.216Z",
+  "generatedAt": "2026-02-27T06:51:42.645Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
     "total": 1,
-    "implemented": 0,
+    "implemented": 1,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Remove the transparency/opacity from the green check mark circles in CheckInButton so the circle is fully opaque and does not allow any underlying content to show through.",
-        "status": "missing",
+        "summary": "Fix the habits data fetching so that habits load correctly on the HabitsPage. Investigate and resolve any broken query, actor initialization, or data-fetching issue in useQueries.ts or HabitList.tsx that prevents habits from appearing in the latest build.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/CheckInButton.tsx"
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/HabitList.tsx",
+          "frontend/src/pages/HabitsPage.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ]
       }
     ]
   },
@@ -26,7 +30,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/HabitCard.tsx",
+    "frontend/src/hooks/useQueries.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

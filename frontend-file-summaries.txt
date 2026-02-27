@@ -9,7 +9,7 @@
   "frontend/src/components/CheckInButton.tsx": "Compact circular check-in button (44px) showing a solid green background with a bold white check mark icon when done, a muted circle for past dates, and an interactive ring button for today with inline spinner.",
   "frontend/src/components/StreakDisplay.tsx": "Component displaying current and longest streak with badge icon and amber-themed styling.",
   "frontend/src/components/WeeklySummary.tsx": "Comprehensive weekly summary with clean stat cards, subtle shadows, professional typography, and balanced spacing for polished presentation.",
-  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations (getHabits, addHabit, checkIn, deleteHabit, ensureDefaultHabits). Now includes a `useDeleteHabit` mutation that calls `actor.deleteHabit(habitId)` and invalidates the habits query on success.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations (getHabits, addHabit, checkIn, deleteHabit, ensureDefaultHabits). The `useGetHabits` query is now gated on the user being authenticated (via `useInternetIdentity`) in addition to the actor being ready, preventing unauthorized calls with the anonymous actor that caused habits to fail loading.",
   "frontend/src/hooks/useTodayCheckIn.ts": "Hook that determines if a habit has been checked in today by comparing timestamps.",
   "frontend/src/hooks/useStreakCalculation.ts": "Hook that calculates current and longest streaks from check-in timestamps, handling consecutive day logic.",
   "frontend/src/hooks/useWeeklySummary.ts": "Hook that processes habit data to generate weekly statistics including total check-ins, completion rate, and per-habit breakdown.",

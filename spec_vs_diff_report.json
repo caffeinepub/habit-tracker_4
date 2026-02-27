@@ -1,14 +1,23 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T22:59:16.214Z",
-  "summary": "The diff modifies HabitCard.tsx and updates frontend-file-summaries.txt and project_state.json. The file summaries explicitly describe that CheckInButton shows 'a solid green background' (fully opaque) and that HabitCard excludes the CheckInButton from reduced-opacity effects so 'the green circle remains fully opaque'. However, the actual CheckInButton.tsx component file is not modified in the diff — only HabitCard.tsx is changed. The fix appears to be implemented in HabitCard.tsx by excluding the CheckInButton from opacity reduction when checked in, rather than modifying CheckInButton.tsx directly. Based on the file summary evidence, REQ-1 appears to be addressed through HabitCard.tsx changes.",
+  "generatedAt": "2026-02-27T06:51:42.642Z",
+  "summary": "The diff addresses REQ-1 by fixing the habits data fetching in useQueries.ts. The useGetHabits query is now gated on the user being authenticated (via useInternetIdentity) in addition to the actor being ready, preventing unauthorized calls with the anonymous actor. HabitList.tsx is described as using useGetHabits and useEnsureDefaultHabits correctly. All acceptance criteria appear to be addressed.",
   "missing_requirements": [],
-  "hallucinated_features": [],
-  "confidence": 0.62,
+  "hallucinated_features": [
+    {
+      "description": "Auto-seeding of a default 'Stretch & Move' habit for new users via useEnsureDefaultHabits hook",
+      "reason": "The build request only asked to fix habits not loading. The addition of automatic default habit seeding (useEnsureDefaultHabits) and its integration into HabitList with a 'Setting up your habits' spinner was not requested and introduces new behavior beyond fixing the loading bug.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.82,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/HabitCard.tsx",
+    "frontend/src/hooks/useQueries.ts",
     "project_state.json"
   ]
 }

@@ -1,25 +1,25 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Habit tracking app with swipe-to-delete and green check mark circles for habits.",
+  "summary": "Habit tracking app where habits are not loading correctly in the latest draft build.",
   "architectural_notes": [],
   "known_issues": [
-    "Green check mark circles have slight transparency, showing content beneath them"
+    "Habits not loading in the latest draft (Version 12)"
   ],
   "isFixRequest": true,
-  "existing_features": [],
-  "new_feature_requests": [
+  "existing_features": [
     {
-      "id": "AR-1",
-      "summary": "Remove the transparency/opacity from the green check mark circles in CheckInButton so the circle is fully opaque and does not allow any underlying content to show through.",
+      "id": "feature-fix-the-habits-data-fetching-so-that-habits-load-correctly-on-the-habitspage-investigate-and-resolve-any-broken-query-actor-initialization-or-data-fetching-issue-in-usequeries-ts-or-habitlist-tsx-that-prevents-habits-from-appearing-in-the-latest-build",
+      "title": "Fix the habits data fetching so that habits load correctly on the HabitsPage. Investigate and resolve any broken query, actor initialization, or data-fetching issue in useQueries.ts or HabitList.tsx that prevents habits from appearing in the latest build.",
       "reqIds": [
         "REQ-1"
       ],
-      "status": "pending"
+      "version": 1
     }
   ],
+  "new_feature_requests": [],
   "gameProjectType": "none",
-  "projectName": "Fix green check mark circle transparency",
+  "projectName": "Habit Tracker",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }
